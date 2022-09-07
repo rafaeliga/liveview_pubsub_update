@@ -25,7 +25,14 @@ defmodule LiveviewPubsubUpdateWeb.ImportLive do
     {:noreply, socket}
   end
   
-  def handle_info({:message, datum}, socket) do
+  def handle_info({:message, datum, time}, socket) do
+    now = Timex.now()
+    
+    Logger.info("sent: #{time}")
+    Logger.info("received: #{now}")
+    
+    Logger.info("diff: #{Timex.diff(time, now, :milliseconds)}")
+    
     Logger.info("handle info: #{datum}")
 
     {:noreply, socket}

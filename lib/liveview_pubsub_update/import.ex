@@ -9,10 +9,10 @@ defmodule LiveviewPubsubUpdate.Import do
 
   @impl true
   def init(_params) do
-    Enum.map(1..1000, fn datum ->
+    Enum.map(1..1000000, fn datum ->
       Logger.info("process: #{datum}")
       
-      Phoenix.PubSub.broadcast(LiveviewPubsubUpdate.PubSub, "import_live", {:message, datum})
+      Phoenix.PubSub.broadcast(LiveviewPubsubUpdate.PubSub, "import_live", {:message, datum, Timex.now()})
     end)
     
     Logger.info("Enum map finished")
